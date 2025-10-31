@@ -1,0 +1,66 @@
+<div class="grid lg:grid-cols-3 gap-8">
+	<!-- Kolom Percakapan -->
+	<div class="lg:col-span-2 bg-white rounded-lg shadow-md">
+		<div class="p-6 border-b">
+			<h2 class="text-2xl font-semibold text-gray-800"><?php echo html_escape($ticket->subject); ?></h2>
+			<p class="text-sm text-gray-500">Tiket #<?php echo $ticket->ticket_code; ?> &bull; Oleh: <?php echo html_escape($ticket->user_name); ?></p>
+		</div>
+		<div class="p-6 space-y-6 h-96 overflow-y-auto">
+			<!-- ... (logika tampilan percakapan sama seperti view publik) ... -->
+			<div class="flex">
+				<div class="flex-shrink-0 mr-4">
+					<div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600"><?php echo substr($ticket->user_name, 0, 1); ?></div>
+				</div>
+				<div class="flex-grow bg-gray-100 rounded-lg p-4">
+					<p class="font-semibold text-gray-800"><?php echo html_escape($ticket->user_name); ?></p>
+					<p class="text-sm text-gray-600 whitespace-pre-wrap"><?php echo html_escape($ticket->description); ?></p>
+				</div>
+			</div>
+			<?php foreach ($replies as $reply): $is_admin = ($reply['role_id'] == 1); ?><div class="flex <?php echo $is_admin ? 'justify-end' : ''; ?>"><?php if (!$is_admin): ?><div class="flex-shrink-0 mr-4">
+							<div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600"><?php echo substr($reply['replier_name'], 0, 1); ?></div>
+						</div><?php endif; ?><div class="flex-grow <?php echo $is_admin ? 'bg-blue-100 text-right' : 'bg-gray-100'; ?> rounded-lg p-4 max-w-xl">
+						<p class="font-semibold <?php echo $is_admin ? 'text-blue-800' : 'text-gray-800'; ?>"><?php echo html_escape($reply['replier_name']); ?></p>
+						<p class="text-sm text-gray-600 whitespace-pre-wrap"><?php echo html_escape($reply['message']); ?></p>
+					</div><?php if ($is_admin): ?><div class="flex-shrink-0 ml-4">
+							<div class="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center font-bold text-blue-600">A</div>
+						</div><?php endif; ?></div><?php endforeach; ?>
+		</div>
+		<div class="p-6 border-t">
+			<?php if ($ticket->status != 'closed'): ?>
+				<form action="<?php echo site_url('admin/tickets/view/' . $ticket->ticket_id); ?>" method="post">
+					<input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>" />
+					<textarea name="reply_message" rows="4" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5 mb-4" placeholder="Tulis balasan Anda..." required></textarea>
+					<button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">Kirim Balasan</button>
+				</form>
+			<?php else: ?><p class="text-center text-gray-500 font-medium">Tiket ini telah ditutup.</p><?php endif; ?>
+		</div>
+	</div>
+	<!-- Kolom Aksi Admin -->
+	<div class="lg:col-span-1">
+		<div class="bg-white p-8 rounded-lg shadow-md">
+			<h3 class="text-xl font-semibold mb-6">Aksi Admin</h3>
+			<form action="<?php echo site_url('admin/tickets/view/' . $ticket->ticket_id); ?>" method="post">
+				<input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>" />
+				<input type="hidden" name="update_status" value="1" />
+				<div class="mb-4">
+					<label class="block mb-2 text-sm font-medium">Ubah Status Tiket</label>
+					<select name="status" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+						<option value="open" <?php if ($ticket->status == 'open') {
+    echo 'selected';
+} ?>>Open</option>
+						<option value="in_progress" <?php if ($ticket->status == 'in_progress') {
+    echo 'selected';
+} ?>>In Progress</option>
+						<option value="resolved" <?php if ($ticket->status == 'resolved') {
+    echo 'selected';
+} ?>>Resolved</option>
+						<option value="closed" <?php if ($ticket->status == 'closed') {
+    echo 'selected';
+} ?>>Closed</option>
+					</select>
+				</div>
+				<button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5">Update Status</button>
+			</form>
+		</div>
+	</div>
+</div>

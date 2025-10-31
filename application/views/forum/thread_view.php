@@ -1,0 +1,48 @@
+<div class="mb-6">
+	<a href="<?php echo site_url('forum'); ?>" class="text-blue-600 hover:underline">&larr; Kembali ke Daftar Forum</a>
+</div>
+
+<div class="bg-white rounded-lg shadow-md">
+	<!-- Topik Utama -->
+	<div class="p-6 border-b">
+		<p class="text-sm text-gray-500">Kategori: <?php echo html_escape($thread->category_name); ?></p>
+		<h1 class="text-3xl font-bold text-gray-800 mt-1"><?php echo html_escape($thread->title); ?></h1>
+	</div>
+	<div class="p-6 flex">
+		<div class="flex-shrink-0 mr-4 text-center">
+			<div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-600"><?php echo substr($thread->author_name, 0, 1); ?></div>
+			<p class="mt-2 text-sm font-semibold"><?php echo html_escape($thread->author_name); ?></p>
+		</div>
+		<div class="flex-grow">
+			<p class="text-xs text-gray-500 mb-2">Diposting pada <?php echo date('d F Y, H:i', strtotime($thread->created_at)); ?></p>
+			<div class="prose max-w-none"><?php echo nl2br(html_escape($thread->content)); ?></div>
+		</div>
+	</div>
+
+	<!-- Balasan -->
+	<div class="bg-gray-50 p-6 space-y-6">
+		<?php foreach ($posts as $post): ?>
+			<div class="flex">
+				<div class="flex-shrink-0 mr-4 text-center">
+					<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-600"><?php echo substr($post['author_name'], 0, 1); ?></div>
+					<p class="mt-2 text-sm font-semibold"><?php echo html_escape($post['author_name']); ?></p>
+					<p class="text-xs text-gray-500"><?php echo html_escape($post['position']); ?></p>
+				</div>
+				<div class="flex-grow bg-white rounded-lg p-4 border">
+					<p class="text-xs text-gray-500 mb-2">Membalas pada <?php echo date('d F Y, H:i', strtotime($post['created_at'])); ?></p>
+					<div class="prose max-w-none text-sm"><?php echo nl2br(html_escape($post['content'])); ?></div>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+
+	<!-- Form Balasan -->
+	<div class="p-6 border-t">
+		<h3 class="text-lg font-semibold mb-4">Tulis Balasan Anda</h3>
+		<form action="<?php echo site_url('forum/thread/' . $thread->thread_id); ?>" method="post">
+			<input type="hidden" name="<?php echo $csrf['name']; ?>" value="<?php echo $csrf['hash']; ?>" />
+			<textarea name="content" rows="5" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5 mb-4" placeholder="Tulis balasan Anda di sini..." required></textarea>
+			<button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5">Kirim Balasan</button>
+		</form>
+	</div>
+</div>
