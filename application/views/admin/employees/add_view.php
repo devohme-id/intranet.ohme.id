@@ -12,32 +12,40 @@
 		<div class="grid md:grid-cols-2 gap-6">
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Nama Lengkap <span class="text-red-500">*</span></label>
-				<input type="text" name="full_name" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('full_name'); ?>" required>
+				<input type="text" name="full_name" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('full_name'); ?>" 
+				placeholder="nama lengkap"
+				required>
 			</div>
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">NIK <span class="text-red-500">*</span></label>
-				<input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('nik'); ?>" required>
+				<input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('nik'); ?>" 
+				placeholder="nik"
+				required>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">No Id Card</label>
-				<input type="text" name="id_card_no" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('id_card_no'); ?>">
+				<label class="block mb-2 text-sm font-medium">No Id Card <span class="text-red-500">*</span></label>
+				<input type="text" name="id_card_no" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('id_card_no'); ?>" 
+				placeholder="nomor id card"
+				required>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Fingerprint</label>
-				<input type="text" name="fingerprint_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('fingerprint_id'); ?>">
+				<label class="block mb-2 text-sm font-medium">Fingerprint <span class="text-red-500">*</span></label>
+				<input type="text" name="fingerprint_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('fingerprint_id'); ?>" 
+				placeholder="fingerprint"
+				required>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Tanggal Lahir</label>
-				<input type="date" name="birth_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('birth_date'); ?>">
+				<label class="block mb-2 text-sm font-medium">Tanggal Lahir <span class="text-red-500">*</span></label>
+				<input type="date" name="birth_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('birth_date'); ?>" required>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Join Date</label>
-				<input type="date" name="join_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('join_date'); ?>">
+				<label class="block mb-2 text-sm font-medium">Join Date <span class="text-red-500">*</span></label>
+				<input type="date" name="join_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('join_date'); ?>" required>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Jabatan</label>
-				<select name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
-					<option value="">-- pilih position --</option>
+				<label class="block mb-2 text-sm font-medium">Jabatan <span class="text-red-500">*</span></label>
+				<select name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" required>
+					<option value="" readonly hidden>-- pilih position --</option>
 					<?php foreach ($positions as $position): ?>
 						<option value="<?php echo $position['position']; ?>" <?php echo set_select('position', $position['position']); ?>>
 							<?php echo html_escape($position['position']); ?>
@@ -46,9 +54,9 @@
 				</select>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Departemen</label>
-				<select name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
-					<option value="">-- pilih departemen --</option>
+				<label class="block mb-2 text-sm font-medium">Departemen <span class="text-red-500">*</span></label>
+				<select name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" required>
+					<option value="" readonly hidden>-- pilih departemen --</option>
 					<?php foreach ($departments as $department): ?>
 						<option value="<?php echo $department['department']; ?>" <?php echo set_select('department', $department['department']); ?>>
 							<?php echo html_escape($department['department']); ?>
@@ -59,9 +67,9 @@
 		</div>
 
 		<div class="mb-6">
-			<label class="block mb-2 text-sm font-medium">Grup</label>
-			<select name="group_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
-				<option value="">-- pilih grup --</option>
+			<label class="block mb-2 text-sm font-medium">Group <span class="text-red-500">*</span></label>
+			<select name="group_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" required>
+				<option value="" readonly hidden>-- pilih grup --</option>
 				<?php foreach ($groups as $group): ?>
 					<option value="<?php echo $group['group_id']; ?>" <?php echo set_select('group_id', $group['group_id']); ?>>
 						<?php echo html_escape($group['group_name']); ?>

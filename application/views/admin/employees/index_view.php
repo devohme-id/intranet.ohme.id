@@ -93,7 +93,11 @@
 								<?php endif; ?>
 								<?php if ($can_delete): // **PERBAIKAN** 
 								?>
-									<button onclick="openDeleteModal('<?php echo site_url('admin/employees/delete/' . $emp['employee_id']); ?>', '<?php echo html_escape($emp['full_name']); ?>')" class="font-medium text-red-600 hover:underline ml-3">Hapus</button>
+									<button
+										onclick="openDeleteModalPost('<?php echo site_url('admin/employees/delete/' . $emp['employee_id']); ?>', '<?php echo html_escape($emp['full_name']); ?>')"
+										class="font-medium text-red-600 hover:underline ml-3">
+										Hapus
+									</button>
 								<?php endif; ?>
 							</td>
 						</tr>
@@ -106,3 +110,40 @@
 		<?php echo $pagination; ?>
 	</div>
 </div>
+
+<script type="text/javascript">
+	// --- PENTING: Variabel CSRF harus berada di Global Scope (di sini) ---
+	var CI_CSRF_NAME = '<?php echo $this->security->get_csrf_token_name(); ?>';
+	var CI_CSRF_HASH = '<?php echo $this->security->get_csrf_hash(); ?>';
+
+
+	function openDeleteModalPost(deleteUrl, employeeName) {
+		// Tampilkan dialog konfirmasi
+		if (confirm("Apakah Anda yakin ingin menghapus data karyawan **" + employeeName + "**?")) {
+
+			// Cek apakah variabel CSRF sudah tersedia (Variabel global seharusnya selalu tersedia)
+			if (typeof CI_CSRF_NAME === 'undefined' || typeof CI_CSRF_HASH === 'undefined') {
+				alert('Error: Variabel CSRF CodeIgniter tidak ditemukan.');
+				return;
+			}
+
+			// --- 1. Buat Form Dinamis ---
+			var form = document.createElement('form');
+			form.setAttribute('method', 'post');
+			form.setAttribute('action', deleteUrl);
+
+			// --- 2. Tambahkan Input CSRF Token menggunakan variabel JavaScript ---
+			var hiddenCsrf = document.createElement('input');
+			hiddenCsrf.setAttribute('type', 'hidden');
+			hiddenCsrf.setAttribute('name', CI_CSRF_NAME);
+			hiddenCsrf.setAttribute('value', CI_CSRF_HASH); // Menggunakan nilai HASH saat halaman dimuat
+			form.appendChild(hiddenCsrf);
+
+			// --- 3. Pasang Form ke Body dan Submit ---
+			document.body.appendChild(form);
+			form.submit(); // Lakukan request POST yang aman
+		} else {
+			console.log("Penghapusan dibatalkan.");
+		}
+	}
+</script>

@@ -4,31 +4,37 @@
 
 		<div class="grid md:grid-cols-2 gap-6">
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Nama Lengkap</label>
+				<label class="block mb-2 text-sm font-medium">Nama Lengkap <span class="text-red-500">*</span></label>
 				<input type="text" name="full_name" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->full_name); ?>" required>
+				<?php echo form_error('full_name','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">NIK</label>
+				<label class="block mb-2 text-sm font-medium">NIK <span class="text-red-500">*</span></label>
 				<input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->nik); ?>" required>
+				<?php echo form_error('nik','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">No Id Card</label>
+				<label class="block mb-2 text-sm font-medium">No Id Card <span class="text-red-500">*</span></label>
 				<input type="text" name="id_card_no" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->id_card_no); ?>">
+				<?php echo form_error('id_card_no','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Fingerprint</label>
+				<label class="block mb-2 text-sm font-medium">Fingerprint <span class="text-red-500">*</span></label>
 				<input type="text" name="fingerprint_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->fingerprint_id); ?>">
+				<?php echo form_error('fingerprint_id','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Tanggal Lahir</label>
+				<label class="block mb-2 text-sm font-medium">Tanggal Lahir <span class="text-red-500">*</span></label>
 				<input type="date" name="birth_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->birth_date); ?>">
+				<?php echo form_error('birth_date','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Join Date</label>
+				<label class="block mb-2 text-sm font-medium">Join Date <span class="text-red-500">*</span></label>
 				<input type="date" name="join_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->join_date); ?>">
+				<?php echo form_error('join_date','<span class="text-red-500">', '</span>'); ?>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Jabatan</label>
+				<label class="block mb-2 text-sm font-medium">Jabatan <span class="text-red-500">*</span></label>
 				<select name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
 					<option value="">-- pilih departemen --</option>
 					<?php foreach ($positions as $position): ?>
@@ -39,7 +45,7 @@
 				</select>
 			</div>
 			<div class="mb-4">
-				<label class="block mb-2 text-sm font-medium">Departemen</label>
+				<label class="block mb-2 text-sm font-medium">Departemen <span class="text-red-500">*</span></label>
 				<select name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
 					<option value="">-- pilih departemen --</option>
 					<?php foreach ($departments as $department): ?>
@@ -52,7 +58,7 @@
 		</div>
 
 		<div class="mb-6">
-			<label class="block mb-2 text-sm font-medium">Grup</label>
+			<label class="block mb-2 text-sm font-medium">Grup <span class="text-red-500">*</span></label>
 			<select name="group_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
 				<option value="">-- pilih grup --</option>
 				<?php foreach ($groups as $group): ?>

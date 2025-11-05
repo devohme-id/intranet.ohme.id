@@ -62,6 +62,13 @@ class Employees extends MY_Controller
 
 		$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|trim');
 		$this->form_validation->set_rules('nik', 'NIK', 'required|trim|is_unique[m_employees.nik]');
+		$this->form_validation->set_rules('id_card_no', 'No Id Card', 'required|trim|is_unique[m_employees.id_card_no]');
+		$this->form_validation->set_rules('fingerprint_id', 'Fingerprint', 'required|trim|is_unique[m_employees.fingerprint_id]');
+		$this->form_validation->set_rules('birth_date', 'Tanggal Lahir', 'required|trim');
+		$this->form_validation->set_rules('join_date', 'Join Date', 'required|trim');
+		$this->form_validation->set_rules('position', 'Jabatan', 'required|trim');
+		$this->form_validation->set_rules('department', 'Departemen', 'required|trim');
+		$this->form_validation->set_rules('group_id', 'Group', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['managers'] = $this->admin_employee->get_all_employees_for_dropdown();
@@ -103,10 +110,21 @@ class Employees extends MY_Controller
 		}
 
 		$original_nik = $employee->nik;
-		$is_unique_rule = ($this->input->post('nik') != $original_nik) ? '|is_unique[m_employees.nik]' : '';
+		$original_card = $employee->id_card_no;
+		$original_finger = $employee->fingerprint_id;
+		$nik_unique_rule = ($this->input->post('nik') != $original_nik) ? '|is_unique[m_employees.nik]' : '';
+		$card_unique_rule = ($this->input->post('id_card_no') != $original_card) ? '|is_unique[m_employees.id_card_no]' : '';
+		$fingerprint_unique_rule = ($this->input->post('fingerprint_id') != $original_finger) ? '|is_unique[m_employees.fingerprint_id]' : '';
 
 		$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'required|trim');
-		$this->form_validation->set_rules('nik', 'NIK', 'required|trim' . $is_unique_rule);
+		$this->form_validation->set_rules('nik', 'NIK', 'required|trim' . $nik_unique_rule);
+		$this->form_validation->set_rules('id_card_no', 'No Id Card', 'required|trim'.$card_unique_rule);
+		$this->form_validation->set_rules('fingerprint_id', 'Fingerprint', 'required|trim'.$fingerprint_unique_rule);
+		$this->form_validation->set_rules('birth_date', 'Tanggal Lahir', 'required|trim');
+		$this->form_validation->set_rules('join_date', 'Join Date', 'required|trim');
+		$this->form_validation->set_rules('position', 'Jabatan', 'required|trim');
+		$this->form_validation->set_rules('department', 'Departemen', 'required|trim');
+		$this->form_validation->set_rules('group_id', 'Group', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['employee'] = $employee;
