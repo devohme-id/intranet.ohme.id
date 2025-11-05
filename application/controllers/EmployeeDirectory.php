@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') || exit('No direct script access allowed');
 
-class Employeedirectory extends MY_Controller
+class EmployeeDirectory extends MY_Controller
 {
     public function __construct()
 	{
@@ -17,7 +17,7 @@ class Employeedirectory extends MY_Controller
 		// ====================================================================
 		// KONFIGURASI PAGINATION YANG DIPERBAIKI
 		// ====================================================================
-		$config['base_url'] = site_url('Employeedirectory/index');
+		$config['base_url'] = site_url('EmployeeDirectory/index');
 		$config['total_rows'] = $this->employee_model->count_employees($search_term);
 		$config['per_page'] = 12;
 		$config['use_page_numbers'] = TRUE;
