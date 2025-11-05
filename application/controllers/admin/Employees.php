@@ -3,7 +3,7 @@ defined('BASEPATH') || exit('No direct script access allowed');
 
 class Employees extends MY_Controller
 {
-    public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->check_permission('MANAGE_EMPLOYEES');
@@ -65,6 +65,7 @@ class Employees extends MY_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['managers'] = $this->admin_employee->get_all_employees_for_dropdown();
+			$data['groups'] = $this->admin_employee->get_all_groups_for_dropdown();
 			$this->render_page('admin/employees/add_view', $data, 'Tambah Karyawan Baru');
 		} else {
 			$manager_id = $this->input->post('manager_id');
@@ -74,7 +75,12 @@ class Employees extends MY_Controller
 				'position' => $this->input->post('position'),
 				'department' => $this->input->post('department'),
 				'manager_id' => empty($manager_id) ? NULL : $manager_id,
-				'is_active' => $this->input->post('is_active') ?? 1
+				'is_active' => $this->input->post('is_active') ?? 1,
+				'id_card_no' => $this->input->post('id_card_no'),
+				'fingerprint_id' => $this->input->post('fingerprint_id'),
+				'birth_date' => $this->input->post('birth_date'),
+				'join_date' => $this->input->post('join_date'),
+				'group_id' => $this->input->post('group_id')
 			];
 
 			if ($this->admin_employee->add_employee($data)) {
@@ -91,8 +97,8 @@ class Employees extends MY_Controller
 		$this->check_permission('EDIT_EMPLOYEES');
 		$employee = $this->admin_employee->get_employee_by_id($id);
 		if (!$employee) {
-            show_404();
-        }
+			show_404();
+		}
 
 		$original_nik = $employee->nik;
 		$is_unique_rule = ($this->input->post('nik') != $original_nik) ? '|is_unique[m_employees.nik]' : '';
@@ -103,6 +109,7 @@ class Employees extends MY_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$data['employee'] = $employee;
 			$data['managers'] = $this->admin_employee->get_all_employees_for_dropdown($id);
+			$data['groups'] = $this->admin_employee->get_all_groups_for_dropdown($id);
 			$this->render_page('admin/employees/edit_view', $data, 'Edit Karyawan: ' . $employee->full_name);
 		} else {
 			$manager_id = $this->input->post('manager_id');
@@ -112,7 +119,12 @@ class Employees extends MY_Controller
 				'position' => $this->input->post('position'),
 				'department' => $this->input->post('department'),
 				'manager_id' => empty($manager_id) ? NULL : $manager_id,
-				'is_active' => $this->input->post('is_active') ?? 0
+				'is_active' => $this->input->post('is_active') ?? 0,
+				'id_card_no' => $this->input->post('id_card_no'),
+				'fingerprint_id' => $this->input->post('fingerprint_id'),
+				'birth_date' => $this->input->post('birth_date'),
+				'join_date' => $this->input->post('join_date'),
+				'group_id' => $this->input->post('group_id')
 			];
 
 			if ($this->admin_employee->update_employee($id, $data) > 0) {
