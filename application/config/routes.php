@@ -53,3 +53,6 @@ $route['default_controller'] = 'auth/login';
 $route['api/serverstatus/check'] = 'api/ServerStatus/check';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['employeedirectory'] = 'EmployeeDirectory'; 
+$route['employeedirectory/(:any)'] = 'EmployeeDirectory/$1';
