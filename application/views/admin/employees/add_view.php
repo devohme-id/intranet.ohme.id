@@ -19,6 +19,22 @@
 				<input type="text" name="nik" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('nik'); ?>" required>
 			</div>
 			<div class="mb-4">
+				<label class="block mb-2 text-sm font-medium">No Id Card</label>
+				<input type="text" name="id_card_no" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('id_card_no'); ?>">
+			</div>
+			<div class="mb-4">
+				<label class="block mb-2 text-sm font-medium">Fingerprint</label>
+				<input type="text" name="fingerprint_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('fingerprint_id'); ?>">
+			</div>
+			<div class="mb-4">
+				<label class="block mb-2 text-sm font-medium">Tanggal Lahir</label>
+				<input type="date" name="birth_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('birth_date'); ?>">
+			</div>
+			<div class="mb-4">
+				<label class="block mb-2 text-sm font-medium">Join Date</label>
+				<input type="date" name="join_date" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('join_date'); ?>">
+			</div>
+			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Jabatan</label>
 				<input type="text" name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('position'); ?>">
 			</div>
@@ -26,6 +42,18 @@
 				<label class="block mb-2 text-sm font-medium">Departemen</label>
 				<input type="text" name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('department'); ?>">
 			</div>
+		</div>
+
+		<div class="mb-6">
+			<label class="block mb-2 text-sm font-medium">Grup</label>
+			<select name="group_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+				<option value="">-- pilih grup --</option>
+				<?php foreach ($groups as $group): ?>
+					<option value="<?php echo $group['group_id']; ?>" <?php echo set_select('group_id', $group['group_id']); ?>>
+						<?php echo html_escape($group['group_name']); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
 		</div>
 
 		<div class="mb-6">
