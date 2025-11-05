@@ -6,13 +6,14 @@ class EmployeeDirectory extends MY_Controller
     public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Employee_model');
+		
 		$this->load->library('pagination');
 	}
 
 	public function index()
 	{
-		$search_term = $this->input->get('search', TRUE);
+		$this->load->model('employee_model');
+		$search_term = ($this->input->get('search', TRUE));
 
 		// ====================================================================
 		// KONFIGURASI PAGINATION YANG DIPERBAIKI
