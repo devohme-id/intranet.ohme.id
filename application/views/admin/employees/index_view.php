@@ -46,6 +46,11 @@
 					<th class="px-6 py-3">Jabatan</th>
 					<th class="px-6 py-3">Departemen</th>
 					<th class="px-6 py-3">Atasan Langsung</th>
+					<th class="px-6 py-3">Group</th>
+					<th class="px-6 py-3">ID Card</th>
+					<th class="px-6 py-3">Fingerprint</th>
+					<th class="px-6 py-3">Join Date</th>
+					<th class="px-6 py-3">Birth Date</th>
 					<th class="px-6 py-3 text-center">Status</th>
 					<th class="px-6 py-3 text-right">Aksi</th>
 				</tr>
@@ -68,7 +73,12 @@
 							<td class="px-6 py-4"><?php echo html_escape($emp['nik']); ?></td>
 							<td class="px-6 py-4"><?php echo html_escape($emp['position']); ?></td>
 							<td class="px-6 py-4"><?php echo html_escape($emp['department']); ?></td>
-							<td class="px-6 py-4"><?php echo html_escape($emp['manager_name'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['manager_id'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['group_id'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['id_card_no'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['fingerprint_id'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['joint_date'] ?? '-'); ?></td>
+							<td class="px-6 py-4"><?php echo html_escape($emp['birth_date'] ?? '-'); ?></td>
 							<td class="px-6 py-4 text-center">
 								<?php if ($emp['is_active']): ?>
 									<span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Aktif</span>
