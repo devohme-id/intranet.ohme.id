@@ -6,7 +6,7 @@ class Employeedirectory extends MY_Controller
     public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('employee_model');
+		$this->load->model('Employee_model');
 		$this->load->library('pagination');
 	}
 
