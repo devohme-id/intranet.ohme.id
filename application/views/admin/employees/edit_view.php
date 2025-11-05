@@ -29,11 +29,25 @@
 			</div>
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Jabatan</label>
-				<input type="text" name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->position); ?>">
+				<select name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+					<option value="">-- pilih departemen --</option>
+					<?php foreach ($positions as $position): ?>
+						<option value="<?php echo $position['position']; ?>" <?php echo html_escape($employee->position == $position['position']) ? 'selected' : ''; ?>>
+							<?php echo html_escape($position['position']); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Departemen</label>
-				<input type="text" name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo html_escape($employee->department); ?>">
+				<select name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+					<option value="">-- pilih departemen --</option>
+					<?php foreach ($departments as $department): ?>
+						<option value="<?php echo $department['department']; ?>" <?php echo html_escape($employee->department == $department['department']) ? 'selected' : ''; ?>>
+							<?php echo html_escape($department['department']); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 		</div>
 
@@ -42,7 +56,7 @@
 			<select name="group_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
 				<option value="">-- pilih grup --</option>
 				<?php foreach ($groups as $group): ?>
-					<option value="<?php echo $group['group_id']; ?>" <?php echo ($employee->group_id == $group['group_id']) ? 'selected' : ''; ?>>
+					<option value="<?php echo $group['group_id']; ?>" <?php echo html_escape($employee->group_id == $group['group_id']) ? 'selected' : ''; ?>>
 						<?php echo html_escape($group['group_name']); ?>
 					</option>
 				<?php endforeach; ?>
@@ -54,7 +68,7 @@
 			<select name="manager_id" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
 				<option value="">-- Tidak Ada Atasan --</option>
 				<?php foreach ($managers as $manager): ?>
-					<option value="<?php echo $manager['employee_id']; ?>" <?php echo ($employee->manager_id == $manager['employee_id']) ? 'selected' : ''; ?>>
+					<option value="<?php echo $manager['employee_id']; ?>" <?php echo html_escape($employee->manager_id == $manager['employee_id']) ? 'selected' : ''; ?>>
 						<?php echo html_escape($manager['full_name']) . ' (' . html_escape($manager['nik']) . ')'; ?>
 					</option>
 				<?php endforeach; ?>

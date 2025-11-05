@@ -36,11 +36,25 @@
 			</div>
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Jabatan</label>
-				<input type="text" name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('position'); ?>">
+				<select name="position" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+					<option value="">-- pilih position --</option>
+					<?php foreach ($positions as $position): ?>
+						<option value="<?php echo $position['position']; ?>" <?php echo set_select('position', $position['position']); ?>>
+							<?php echo html_escape($position['position']); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 			<div class="mb-4">
 				<label class="block mb-2 text-sm font-medium">Departemen</label>
-				<input type="text" name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5" value="<?php echo set_value('department'); ?>">
+				<select name="department" class="bg-gray-50 border border-gray-300 text-sm rounded-lg w-full p-2.5">
+					<option value="">-- pilih departemen --</option>
+					<?php foreach ($departments as $department): ?>
+						<option value="<?php echo $department['department']; ?>" <?php echo set_select('department', $department['department']); ?>>
+							<?php echo html_escape($department['department']); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 		</div>
 

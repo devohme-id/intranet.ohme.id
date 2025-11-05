@@ -66,6 +66,8 @@ class Employees extends MY_Controller
 		if ($this->form_validation->run() == FALSE) {
 			$data['managers'] = $this->admin_employee->get_all_employees_for_dropdown();
 			$data['groups'] = $this->admin_employee->get_all_groups_for_dropdown();
+			$data['departments'] = $this->admin_employee->get_all_departments_for_dropdown();
+			$data['positions'] = $this->admin_employee->get_all_positions_for_dropdown();
 			$this->render_page('admin/employees/add_view', $data, 'Tambah Karyawan Baru');
 		} else {
 			$manager_id = $this->input->post('manager_id');
@@ -110,6 +112,8 @@ class Employees extends MY_Controller
 			$data['employee'] = $employee;
 			$data['managers'] = $this->admin_employee->get_all_employees_for_dropdown($id);
 			$data['groups'] = $this->admin_employee->get_all_groups_for_dropdown($id);
+			$data['positions'] = $this->admin_employee->get_all_positions_for_dropdown($id);
+			$data['departments'] = $this->admin_employee->get_all_departments_for_dropdown($id);
 			$this->render_page('admin/employees/edit_view', $data, 'Edit Karyawan: ' . $employee->full_name);
 		} else {
 			$manager_id = $this->input->post('manager_id');
