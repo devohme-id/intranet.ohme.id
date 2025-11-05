@@ -54,10 +54,30 @@ class Admin_Employee_model extends CI_Model
 	public function get_all_groups_for_dropdown($exclude_id = null)
 	{
 		if ($exclude_id) {
-			$this->db->where('group_id', '!=', $exclude_id);
+			$this->db->where('group_id !=', $exclude_id);
 		}
 		$this->db->order_by('group_code', 'DESC');
 		return $this->db->get('m_shift_groups')->result_array();
+	}
+
+	public function get_all_departments_for_dropdown($exclude_name = null)
+	{
+		if($exclude_name)
+		{
+			$this->db->where('department !=', $exclude_name );
+		}
+		$this->db->order_by('department', 'ASC')->group_by('department');
+		return $this->db->get('m_employees')->result_array();
+	}
+
+	public function get_all_positions_for_dropdown($exclude_name = null)
+	{
+		if($exclude_name)
+		{
+			$this->db->where('position !=', $exclude_name );
+		}
+		$this->db->order_by('position', 'ASC')->group_by('position');
+		return $this->db->get('m_employees')->result_array();
 	}
 
 	public function add_employee($data)
