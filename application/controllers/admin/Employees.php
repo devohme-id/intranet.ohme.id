@@ -120,8 +120,8 @@ class Employees extends MY_Controller
 		$this->form_validation->set_rules('nik', 'NIK', 'required|trim' . $nik_unique_rule);
 		$this->form_validation->set_rules('id_card_no', 'No Id Card', 'required|trim'.$card_unique_rule);
 		$this->form_validation->set_rules('fingerprint_id', 'Fingerprint', 'required|trim'.$fingerprint_unique_rule);
-		$this->form_validation->set_rules('birth_date', 'Tanggal Lahir', 'required|trim');
-		$this->form_validation->set_rules('join_date', 'Join Date', 'required|trim');
+		// $this->form_validation->set_rules('birth_date', 'Tanggal Lahir', 'required|trim');
+		// $this->form_validation->set_rules('join_date', 'Join Date', 'required|trim');
 		$this->form_validation->set_rules('position', 'Jabatan', 'required|trim');
 		$this->form_validation->set_rules('department', 'Departemen', 'required|trim');
 		$this->form_validation->set_rules('group_id', 'Group', 'required|trim');
